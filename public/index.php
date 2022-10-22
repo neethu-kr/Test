@@ -1,15 +1,20 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
-
 require '../vendor/autoload.php';
+$conf=[
+    'settings'=>[
+        'displayErrorDetails'=>true,
+      ],
+];
+$c=new \Slim\Container($conf);
+$app = new \Slim\App($c) ;
+require '../lib/middlewareClass.php';
+//require '../src/middleware.php';
+require '../API/others.php';
+require '../API/putdet.php';
+require '../API/request.php';
+require '../API/response.php';
+require '../API/Uploadfile.php';
+require '../API/testmiddleware.php';
 
-$app = new \Slim\App;
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
-
-    return $response;
-});
 $app->run();
 
